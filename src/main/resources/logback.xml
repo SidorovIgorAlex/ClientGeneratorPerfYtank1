@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+<!--    <logger name="org.springframework.web" level="DEBUG"/>-->
+    <logger name="com.aplana.Application" level="ERROR"/>
+
+<!--    <appender name="FILE_ERROR" class="ch.qos.logback.core.FileAppender">-->
+<!--        <file>logs/errors.log</file>-->
+<!--        <append>true</append>-->
+<!--        &lt;!&ndash; set immediateFlush to false for much higher logging throughput &ndash;&gt;-->
+<!--        <immediateFlush>true</immediateFlush>-->
+<!--        &lt;!&ndash; encoders are assigned the type-->
+<!--             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default &ndash;&gt;-->
+<!--        <encoder>-->
+<!--            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            <level>ERROR</level>-->
+<!--        </filter>-->
+<!--    </appender>-->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%-5level] %logger{15} - %msg%n%rEx</pattern>
+        </encoder>
+        <immediateFlush>false</immediateFlush>
+    </appender>
+
+<!--    <root level="DEBUG">-->
+<!--        <appender-ref ref="CONSOLE"/>-->
+<!--    </root>-->
+    <root level="ERROR">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
