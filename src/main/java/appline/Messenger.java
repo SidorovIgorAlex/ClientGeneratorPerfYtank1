@@ -1,5 +1,6 @@
 package appline;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +9,10 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Controller
@@ -55,8 +59,9 @@ public class Messenger {
     }
 
     @RequestMapping(value = "/status", method = RequestMethod.GET)
-    public ResponseEntity getStatus() throws IOException {
-        Map<String, Object> json = Client.sendCommandToGenerator("http://perf-ytank1:8080/genstatus");
+    public ResponseEntity getStatus(HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        LinkedHashMap<String, Object> json = Client.sendCommandToGenerator("http://perf-ytank1:8080/genstatus");
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("result",json.toString());
         return ResponseEntity.ok().body(resultMap);

@@ -1,8 +1,10 @@
 package appline;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class Client {
 
@@ -13,7 +15,7 @@ public class Client {
 //    private static final String URL_GENERATE_ONE_USER = "http://perf-ytank1:8080/d2cAY";
 //    private static final String URL_REDIS_KEY = "http://perf-ytank1:8080/redisKeys";
 
-    public static Map<String, Object> sendCommandToGenerator(String command) throws RuntimeException {
+    public static LinkedHashMap<String, Object> sendCommandToGenerator(String command) throws RuntimeException {
 
 //        switch (index) {
 //            case "1": {
@@ -43,8 +45,8 @@ public class Client {
 //            default: throw new RuntimeException();
 //        }
 
-        Map<String, Object> result = new RestTemplate().getForObject(command, Map.class);
+        ResponseEntity<Object> result = new RestTemplate().getForEntity(command, Object.class);
 
-        return result;
+        return (LinkedHashMap<String, Object>) ((ArrayList<Object>) result.getBody()).get(0);
     }
 }
