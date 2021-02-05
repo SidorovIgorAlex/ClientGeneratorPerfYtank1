@@ -61,8 +61,7 @@ public class Messenger {
     }
 
     @RequestMapping(value = "/status", method = RequestMethod.GET)
-    public ResponseEntity getStatus(HttpServletResponse response) throws IOException {
-        response.setContentType("application/json");
+    public ResponseEntity getStatus() throws IOException {
         LinkedHashMap<String, Object> json = (LinkedHashMap<String, Object>) Client.sendCommandToGeneratorStatus("http://perf-ytank1:8080/genstatus");
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("result",json.toString());

@@ -31,10 +31,25 @@
         return await response.json(); // parses JSON response into native JavaScript objects
     }
 
+    async function getStatus(){
+        await fetch("http://localhost:8080/status")
+                .then((response) => {
+                            if (response.status >= 400 && response.status < 600) {
+                                throw new Error("Bad response from server");
+                            }
+                        return response.json();
+                    }
+                )
+                .then(data=>{
+                    document.getElementById("textArea").value = data.result;
+                }).catch((error) => {
+                    console.log(error)
+                });
+    }
+
     async function generateUser() {
         var nameKeyValue = document.getElementById("nameKey").value;
         var amountUsersValue = document.getElementById("amountUsers").value;
-        alert(nameKeyValue + ' ' + amountUsersValue);
         postData("http://localhost:8080/generationUser",{amountUsers:amountUsersValue, nameKey:nameKeyValue})
                 .then((response) => {
                             if (response.status >= 400 && response.status < 600) {
@@ -60,6 +75,11 @@
             </button>
         </div>
 </div>
+    <div class="row tab" style="margin-left: 20px; margin-top: 20px;">
+        <button onclick="getStatus()" class="btn btn-outline-primary btn-sm small-width">
+            Получить статус
+        </button>
+    </div>
     <div class="mb-3 tab" style="margin-left: 20px; margin-top: 20px;">
         <label for="textArea" class="form-label tab">Полученные данные</label>
         <textarea class="form-control tab" id="textArea" rows="20"></textarea>
