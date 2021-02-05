@@ -139,5 +139,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.eclipse.jetty.websocket:websocket-common:9.4.34.v20201102" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.4.34.v20201102" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.16" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-mustache:2.4.0" level="project" />
+    <orderEntry type="library" name="Maven: com.samskivert:jmustache:1.15" level="project" />
   </component>
 </module>
