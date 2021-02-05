@@ -50,18 +50,20 @@ public class Messenger {
     }
 
     @PostMapping("/receiveSimCards")
-    public Map<String, Object> receiveSimCardsPost(@RequestBody GenerateUsers generateUsers) throws IOException {
+    public ResponseEntity receiveSimCardsPost(@RequestBody GenerateUsers generateUsers) throws IOException {
         Integer amountVacantSim = generateUsers.getAmountVacantSim();
         System.out.println(amountVacantSim);
         Map<String, Object> json = Client.sendCommandToGenerator(String.format("http://perf-ytank1:8080/vacantSim/phone/upload?limit=%d",
                 amountVacantSim));
-        return json;
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result",json.toString());
+        return ResponseEntity.ok().body(resultMap);
     }
 
     @RequestMapping(value = "/status", method = RequestMethod.GET)
     public ResponseEntity getStatus(HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
-        LinkedHashMap<String, Object> json = Client.sendCommandToGenerator("http://perf-ytank1:8080/genstatus");
+        LinkedHashMap<String, Object> json = (LinkedHashMap<String, Object>) Client.sendCommandToGeneratorStatus("http://perf-ytank1:8080/genstatus");
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("result",json.toString());
         return ResponseEntity.ok().body(resultMap);
@@ -73,9 +75,9 @@ public class Messenger {
     }
 
     @GetMapping("/keyRedis")
-    public Map<String, Object> keyRedis(HttpServletResponse response) throws IOException {
-        response.setContentType("application/json");
-        Map<String, Object> json = Client.sendCommandToGenerator("http://perf-ytank1:8080/redisKeys");
+    public Map<String, Object> keyRedis() throws IOException {
+//        response.setContentType("application/json");
+        Map<String, Object> json = (Map<String, Object>) Client.sendCommandToGenerator("http://perf-ytank1:8080/redisKeys");
         return json;
     }
 }
