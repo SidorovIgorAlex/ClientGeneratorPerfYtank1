@@ -3,7 +3,6 @@ package appline;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -12,9 +11,9 @@ import java.util.Map;
 @Controller
 public class Messenger {
 
-    @GetMapping("/home")
-    public ModelAndView home() {
-        return new ModelAndView("home");
+    @GetMapping("/")
+    public String home() {
+        return "home";
     }
 
     @GetMapping("/generation")
