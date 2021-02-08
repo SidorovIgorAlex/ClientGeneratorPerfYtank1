@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,8 +19,6 @@ public class Messenger {
 
     @GetMapping("/generation")
     public String massGenerationGet() {
-        ModelAndView modelAndView = new ModelAndView("generateUsers.mustache");
-        modelAndView.addObject("generateUsers", new GenerateUsers());
         return "generateUsers";
     }
 
@@ -35,12 +33,9 @@ public class Messenger {
         return ResponseEntity.ok().body(resultMap);
     }
 
-    @GetMapping("/receiveSimCards")
-    public ModelAndView receiveSimCards() {
-        ModelAndView modelAndView = new ModelAndView("receiveSimCards");
-        modelAndView.addObject("generateUsers", new GenerateUsers());
-        return modelAndView;
-
+    @GetMapping("/simCards")
+    public String receiveSimCards() {
+        return "receiveSimCards";
     }
 
     @PostMapping("/receiveSimCards")

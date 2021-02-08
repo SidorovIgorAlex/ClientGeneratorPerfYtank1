@@ -47,24 +47,6 @@
                 });
     }
 
-    async function receiveSimCards(){
-        var amountVacantSimValue = document.getElementById("amountVacantSim").value;
-        postData("http://localhost:8080/receiveSimCards",{amountVacantSim:amountVacantSimValue})
-                .then((response) => {
-                            if (response.status >= 400 && response.status < 600) {
-                                throw new Error("Bad response from server");
-                            }
-                            return response;
-                        }
-                )
-                .then(data=>{
-                    document.getElementById("textArea").value = data.result;
-                }).catch((error) => {
-            console.log(error)
-        });
-
-    }
-
     async function generateUser() {
         var nameKeyValue = document.getElementById("nameKey").value;
         var amountUsersValue = document.getElementById("amountUsers").value;
@@ -85,22 +67,16 @@
 </script>
 <div>
         <div class="row tab" style="margin-left: 20px; margin-top: 20px;">
-            <input  style="max-width:100%" class="col-sm-2 text-primary rounded" type="text" name="nameKey" id="nameKey" placeholder="nameKey:"/>
-            <input  style="max-width:100%" class="col-sm-2 text-primary rounded" type="number" name="amountVacantSim" id="amountVacantSim" placeholder="amountVacantSim:"/>
-            <input  style="max-width:100%" class="col-sm-2 text-primary rounded" type="number" name="amountUsers" id="amountUsers" placeholder="amountUsers:">
+            <input  style="max-width:100%" class="col-sm-2 text-primary rounded" type="text" name="nameKey" id="nameKey" placeholder="Имя ключа в Redis"/>
+            <input  style="max-width:100%" class="col-sm-2 text-primary rounded" type="number" name="amountUsers" id="amountUsers" placeholder="Количество абонов">
             <button onclick="generateUser()" class="btn btn-outline-primary btn-sm small-width">
                 Начать генерацию!
             </button>
         </div>
 </div>
-    <div class="row tab" style="margin-left: 20px; margin-top: 20px; width: 100px">
-        <button onclick="getStatus()" class="btn btn-outline-primary btn-sm small-width">
+    <div class="row tab" style="margin-left: 20px; margin-top: 20px;">
+        <button style="width: 300px" onclick="getStatus()" class="btn btn-outline-primary btn-sm small-width">
             Получить статус
-        </button>
-    </div>
-    <div class="row tab" style="margin-left: 20px; margin-top: 20px; width: 100px">
-        <button onclick="receiveSimCards()" class="btn btn-outline-primary btn-sm small-width">
-            Получение вакантных симок из билинга
         </button>
     </div>
     <div class="mb-3 tab" style="margin-left: 20px; margin-top: 20px;">
