@@ -32,7 +32,7 @@
 
         async function receiveSimCards(){
             var amountVacantSimValue = document.getElementById("amountVacantSim").value;
-            postData("http://localhost:8080/receiveSimCards",{amountVacantSim:amountVacantSimValue})
+            postData("http://perf-ytank1:8090/receiveSimCards",{amountVacantSim:amountVacantSimValue})
                 .then((response) => {
                         if (response.status >= 400 && response.status < 600) {
                             throw new Error("Bad response from server");

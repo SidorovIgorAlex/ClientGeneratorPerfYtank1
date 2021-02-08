@@ -32,7 +32,7 @@
     }
 
     async function getStatus(){
-        await fetch("http://localhost:8080/status")
+        await fetch("http://perf-ytank1:8090/status")
                 .then((response) => {
                             if (response.status >= 400 && response.status < 600) {
                                 throw new Error("Bad response from server");
@@ -48,7 +48,7 @@
     }
 
     async function getKeyRedis(){
-        await fetch("http://localhost:8080/keyRedis")
+        await fetch("http://perf-ytank1:8090/keyRedis")
                 .then((response) => {
                             if (response.status >= 400 && response.status < 600) {
                                 throw new Error("Bad response from server");
@@ -66,7 +66,7 @@
     async function generateUser() {
         var nameKeyValue = document.getElementById("nameKey").value;
         var amountUsersValue = document.getElementById("amountUsers").value;
-        postData("http://localhost:8080/generationUser",{amountUsers:amountUsersValue, nameKey:nameKeyValue})
+        postData("http://perf-ytank1:8090/generationUser",{amountUsers:amountUsersValue, nameKey:nameKeyValue})
                 .then((response) => {
                             if (response.status >= 400 && response.status < 600) {
                                 throw new Error("Bad response from server");
@@ -82,7 +82,7 @@
     }
 
     async function stopAll() {
-        await fetch("http://localhost:8080/stopAll")
+        await fetch("http://perf-ytank1:8090/stopAll")
                 .then((response) => {
                             if (response.status >= 400 && response.status < 600) {
                                 throw new Error("Bad response from server");
