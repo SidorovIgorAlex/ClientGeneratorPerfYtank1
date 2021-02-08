@@ -47,6 +47,22 @@
                 });
     }
 
+    async function getKeyRedis(){
+        await fetch("http://localhost:8080/keyRedis")
+                .then((response) => {
+                            if (response.status >= 400 && response.status < 600) {
+                                throw new Error("Bad response from server");
+                            }
+                        return response.text();
+                    }
+                )
+                .then(data=>{
+                    document.getElementById("textArea").value = data;
+                }).catch((error) => {
+                    console.log(error)
+                });
+    }
+
     async function generateUser() {
         var nameKeyValue = document.getElementById("nameKey").value;
         var amountUsersValue = document.getElementById("amountUsers").value;
@@ -90,6 +106,11 @@
     <div class="row tab" style="margin-left: 20px; margin-top: 20px;">
         <button style="width: 300px" onclick="getStatus()" class="btn btn-outline-primary btn-sm small-width">
             Получить статус
+        </button>
+    </div>
+    <div class="row tab" style="margin-left: 20px; margin-top: 20px;">
+        <button style="width: 300px" onclick="getKeyRedis()" class="btn btn-outline-primary btn-sm small-width">
+            Получить ключи редиса
         </button>
     </div>
     <div class="row tab" style="margin-left: 20px; margin-top: 20px;">

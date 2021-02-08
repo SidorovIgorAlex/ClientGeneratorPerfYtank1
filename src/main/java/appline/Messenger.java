@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -63,8 +62,8 @@ public class Messenger {
         Client.sendCommandToGenerator("http://perf-ytank1:8080/stopAll");
     }
 
-    @GetMapping("/keyRedis")
-    public void keyRedis(HttpServletResponse response) throws IOException {
-        response.getWriter().write(Client.sendCommandToGenerator("http://perf-ytank1:8080/redisKeys").toString());
+    @RequestMapping(value = "/keyRedis", method = RequestMethod.GET)
+    public ResponseEntity keyRedis() throws IOException {
+        return ResponseEntity.ok().body(Client.sendCommandToGenerator("http://perf-ytank1:8080/redisKeys").toString());
     }
 }
