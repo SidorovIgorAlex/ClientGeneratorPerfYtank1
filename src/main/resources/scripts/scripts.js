@@ -3,3 +3,7 @@ async function generateUser() {
     let amountUsers = document.getElementById("amountUsers").getAttribute("value");
     alert(nameKey + '' + amountUsers)
 }
+
+function kek() {
+    alert('this is kek')
+}

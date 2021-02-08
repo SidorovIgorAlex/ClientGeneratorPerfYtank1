@@ -52,7 +52,6 @@ public class Messenger {
     @PostMapping("/receiveSimCards")
     public ResponseEntity receiveSimCardsPost(@RequestBody GenerateUsers generateUsers) throws IOException {
         Integer amountVacantSim = generateUsers.getAmountVacantSim();
-        System.out.println(amountVacantSim);
         Map<String, Object> json = Client.sendCommandToGenerator(String.format("http://perf-ytank1:8080/vacantSim/phone/upload?limit=%d",
                 amountVacantSim));
         HashMap<String, Object> resultMap = new HashMap<>();
