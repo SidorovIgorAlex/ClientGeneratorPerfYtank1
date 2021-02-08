@@ -13,12 +13,12 @@ import java.util.Map;
 @Controller
 public class Messenger {
 
-    @GetMapping("/home")
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home() {
         return new ModelAndView("home");
     }
 
-    @GetMapping("/generation")
+    @RequestMapping(value = "/generation", method = RequestMethod.GET)
     public String massGenerationGet() {
         return "generateUsers";
     }
@@ -34,12 +34,12 @@ public class Messenger {
         return ResponseEntity.ok().body(resultMap);
     }
 
-    @GetMapping("/simCards")
+    @RequestMapping(value = "/simCards", method = RequestMethod.GET)
     public String receiveSimCards() {
         return "receiveSimCards";
     }
 
-    @PostMapping("/receiveSimCards")
+    @RequestMapping(value = "/receiveSimCards", method = RequestMethod.POST)
     public ResponseEntity receiveSimCardsPost(@RequestBody GenerateUsers generateUsers) {
         Integer amountVacantSim = generateUsers.getAmountVacantSim();
         Map<String, Object> json = (Map<String, Object>) Client.sendCommandToGenerator(String.format("http://perf-ytank1:8080/vacantSim/phone/upload?limit=%d",
