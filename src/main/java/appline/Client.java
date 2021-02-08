@@ -12,7 +12,13 @@ public class Client {
         return ((ArrayList<Object>) result.getBody()).get(0);
     }
 
-    public static Map<String, Object> sendCommandToGenerator(String command) throws RuntimeException {
-        return new RestTemplate().getForObject(command, Map.class);
+    public static Object sendCommandToGenerator(String command) throws RuntimeException {
+        Object result;
+        if(command.contains("redisKeys")){
+            result = new RestTemplate().getForObject(command, String.class);
+        } else {
+            result = new RestTemplate().getForObject(command, Map.class);
+        }
+        return result;
     }
 }
