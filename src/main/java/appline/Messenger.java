@@ -58,7 +58,7 @@ public class Messenger {
         return ResponseEntity.ok().body(resultMap);
     }
 
-    @GetMapping("/stopAll")
+    @RequestMapping(value = "/stopAll", method = RequestMethod.GET)
     public void stop() {
         Client.sendCommandToGenerator("http://perf-ytank1:8080/stopAll");
     }
